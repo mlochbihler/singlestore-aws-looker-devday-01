@@ -1,17 +1,14 @@
-# memsql-sagemaker-looker-devday-02
-MemSQL, AWS Sagemaker and Looker Developer Day 02
+# singlestore-aws-looker-devday-01
+Singlestore, AWS and Looker Developer Day 01
 
-Presentation Deck 
+Presentation Deck (DRAFT)
 
-(pdf): https://drive.google.com/file/d/1aJwHmdjpC18c3Sdhqswllws4D6SIxjLA/view?usp=sharing
+(pdf): https://drive.google.com/file/d/11qYxEkCp3cY4_j18CoyMW0fLPxvkVHav/view?usp=sharing
 
-Hands On Workshop - Student Guide
+Hands On Workshop - Student Guide (DRAFT)
 
-(pdf): https://drive.google.com/file/d/1ZtsIYdtuihzvQi0xJTURqZwQbvkgUFho/view?usp=sharing
+(pdf): https://drive.google.com/file/d/18HVHpTtfYSDoNjH1r1iA_uuAcN8BQQiq/view?usp=sharing
 
-Workshop FAQs
+Workshop FAQs (DRAFT)
 
-(pdf): https://drive.google.com/file/d/1D-Gvxn1GvozlDLYqbp_FCvfXWhuCS78B/view?usp=sharing
-
-
-Also, for Section A and B, the code for each step is in this github under individual folders folders.
+(pdf): https://drive.google.com/file/d/1qSg6eAqr77SA8pc-jZErPOdXgVm5mDWx/view?usp=sharing
