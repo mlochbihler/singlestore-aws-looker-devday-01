@@ -1,0 +1,80 @@
+AWSTemplateFormatVersion: '2010-09-09'
+Parameters:
+  ddlEndpoint:
+    Description: SingleStore Cluster Endpoint
+    Type: String
+    Default: '***.svc.singlestore.com'
+  database: 
+    Description: Database Name
+    Type: String
+    Default: nyc_taxi
+  user:
+    Description: Database User Name
+    Type: String
+    Default: admin
+  password:
+    Description: Database Password
+    NoEcho: true
+    Type: String
+Metadata:
+  AWS::CloudFormation::Interface:
+    ParameterGroups:
+      -
+        Label:
+          default: "SingleStore Database Configuration"
+        Parameters:
+          - ddlEndpoint
+          - database
+          - user
+          - password
+    ParameterLabels:
+      ddlEndpoint:
+        default: "SingleStore Cluster Endpoint"
+      database:
+        default: "Database"
+      user:
+        default: "User"
+      password:
+        default: "Password"
+Resources:
+  GlueCustomETLConnectionRole:
+    Type: AWS::IAM::Role
+    Properties:
+      AssumeRolePolicyDocument:
+        Version: '2012-10-17'
+        Statement:
+          - Effect: Allow
+            Principal:
+              Service:
+                - glue.amazonaws.com
+            Action:
+              - sts:AssumeRole
+      Policies:
+        - PolicyName: GlueAccessSecretValue
+          PolicyDocument:
+            Version: '2012-10-17'
+            Statement:
+              - Effect: Allow
+                Action:
+                  - 'secretsmanager:GetSecretValue'
+                  - 'secretsmanager:DescribeSecret'
+                Resource: 'arn:aws:secretsmanager:*:*:secret:aws-glue-*'
+      ManagedPolicyArns:
+        - arn:aws:iam::aws:policy/AmazonEC2ContainerRegistryReadOnly
+        - arn:aws:iam::aws:policy/service-role/AWSGlueServiceRole
+        - arn:aws:iam::aws:policy/AmazonS3ReadOnlyAccess
+  SingleStoreSecret:
+    Type: AWS::SecretsManager::Secret
+    Properties:
+      Name: aws-glue-singlestore-devday-01
+      SecretString: !Join
+        - ""
+        - - '{"ddlEndpoint":"'
+          - !Ref 'ddlEndpoint'
+          - '","database":"'
+          - !Ref 'database'
+          - '","user":"'
+          - !Ref 'user'
+          - '","password":"'
+          - !Ref 'password'
+          - '"}'
